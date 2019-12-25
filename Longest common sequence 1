@@ -1,0 +1,24 @@
+int max(int a,int b){
+    return (a>b)?a:b;
+}
+int lcs(string s1,string s2,int i,int j,int a,int b){
+    if(i==a||j==b){
+        return 0;
+    }
+    else if(s1[i]==s2[j])
+        return 1+lcs(s1,s2,i+1,j+1,a,b);
+    else return max(lcs(s1,s2,i+1,j,a,b),lcs(s1,s2,i,j+1,a,b));
+}
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+        
+        int a=text1.size();
+        int b=text2.size();
+        
+        int i=0; int j=0;
+        
+        return lcs(text1,text2,i,j,a,b);
+        
+    }
+};
