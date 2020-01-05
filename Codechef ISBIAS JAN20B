@@ -1,0 +1,90 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    
+    
+       int n,q;
+       cin>>n>>q;
+       int ar[n];
+       for(int i=0;i<n;i++){
+           cin>>ar[i];
+       }
+        vector<int>v;
+       for(int i=1;i<n;i++){
+           if(ar[i]>ar[i-1]){
+               if(v.size()==0){
+                   v.push_back(i-1);
+                   v.push_back(i);
+               }
+               else{
+                   if(v.back()==i-1){
+                       v.back()=i;
+                   }
+                   else{
+                       v.push_back(i-1);
+                       v.push_back(i);
+                   }
+               }
+           }
+       }
+           
+       /*    for(int i=0;i<v.size();i++){
+               cout<<v[i]<<" ";
+           }
+           cout<<endl; */
+           
+     while(q--){
+          long  int l1, r1;
+           cin>>l1>>r1;
+           l1=l1-1;r1=r1-1;
+           int index1 ,index2;
+            string result; int t1=0,t2=0;
+         
+               // first find right index using dp array V !
+                  for(int i=0;i<v.size();i++){
+                   if(l1==v[i]){
+                      index1=i;
+                       break;
+                   }
+                   else{
+                       if(l1<v[i+1]){
+                       index1=i;
+                       break;}
+                   }
+                   
+                  
+               }
+                 for(int i=0;i<v.size();i++){
+                   if(r1==v[i]){
+                      index2=i;
+                       break;
+                   }
+                   else{
+                       if(r1<v[i+1]){
+                       index2=i;
+                       break;}
+                   }
+                   
+                   
+               }
+                 // index1 && index2 is found ! now apply brain mc 
+               
+               if(index2-index1==1)
+                  result="NO";
+               else{
+                   if((index2-index1)%2==0)
+                   result="YES";
+                   else
+                   result="NO";
+               }
+               
+             //  cout<<index1<<" "<<index2<<endl;
+             cout<<result<<endl;
+               
+           }
+           
+              
+          
+             
+          
+}
