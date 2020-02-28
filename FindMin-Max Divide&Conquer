@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+pair<int,int> findminmax(vector<int>v,int l,int r){
+    
+    pair<int,int>res;
+    
+        if(l==r){
+            res.first=v[l];
+            res.second=v[r];
+            return res;
+        }
+        
+        else if(r==l+1){
+            if(v[l]>v[r]){
+                res.first=v[r];
+                res.second=v[l];
+            }
+            else{
+                res.first=v[l];
+                res.second=v[r];
+            }
+            return res;
+        }
+        
+        else{
+            int mid=(l+r)/2;
+            
+            pair<int,int>res1= findminmax(v,0,mid);
+            pair<int,int>res2= findminmax(v,mid+1,r);
+            
+            if(res1.first>res2.first){
+                res.first=res2.first;
+            }
+            else
+                res.first=res1.first;
+                
+            if(res1.second>res2.second){
+                res.second=res1.second;
+            }
+            else
+                res.second=res2.second;
+            
+            return res;
+        }
+}
+
+int main() {
+	
+	      pair<int,int>p;
+	      
+	      int n;
+	      cin>>n;
+	      
+	      vector<int>v(n);
+	      for(int i=0;i<n;i++){
+	          cin>>v[i];
+	      }
+	    
+	    p = findminmax(v,0,v.size()-1);
+	    
+	    cout<<p.first<<" "<<p.second<<endl;
+}
