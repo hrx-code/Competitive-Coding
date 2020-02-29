@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+
+struct job{
+    
+      int id;
+      int deadline;
+      int profit;
+      
+      job(int id ,int deadline, int profit) : id(id),deadline(deadline), profit(profit) 
+    {} 
+};
+
+bool comp(struct job a, struct job b){
+    
+    return a.profit>b.profit;
+}
+
+int main(){
+        
+        
+           int t;
+           cin>>t;
+           while(t--){
+               int n;
+               cin>>n;
+               vector<job>v;
+               int max=0;
+               for(int i=0;i<n;i++){
+                   int j,d,p;
+                   cin>>j>>d>>p;
+                   v.push_back(job(j,d,p));
+                   if(d>max)
+                   max=d;
+               }
+         sort(v.begin(),v.end(),comp);
+        
+            //   for(int i=0;i<n;i++){
+            //       cout<<v[i].id<<" "<<v[i].deadline<<" "<<v[i].profit<<endl;
+            //   }  
+            //   cout<<endl;
+               vector<int>res(max+1,0);
+               
+               for(int i=0;i<n;i++){
+                   int slot=v[i].deadline;
+                   
+                   while(slot!=0){
+                       if(res[slot]==0){
+                           res[slot]=v[i].profit;
+                           break;
+                       }
+                       slot--;
+                   }
+               }
+    int sum=0; int count=0;
+               for(int i=0;i<res.size();i++){
+                   if(res[i]!=0){
+                       count++;
+                       sum+=res[i];
+                   }
+               }
+               cout<<count<<" "<<sum<<endl;
+           }
+}
