@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int partition(int *v,int l,int r){
+    
+    int pivot=v[r];
+    int index=l;
+    
+    for(int i=l;i<=r-1;i++){
+        if(v[i]<=pivot){
+            int temp=v[i];
+            v[i]=v[index]; 
+            v[index]=temp;
+            index++;
+        }
+    }
+    int temp=v[r];
+    v[r]=v[index];
+    v[index]=temp;
+    return index;
+    
+}
+
+void quicksort(int *v,int l,int r){
+    
+    if(l<r){
+        int j=partition(v,l,r);
+        quicksort(v,l,j-1);
+        quicksort(v,j+1,r);
+    }
+}
+
+int main(){
+    
+          int n;
+          cin>>n;
+          
+          int v[n];
+          for(int i=0;i<n;i++){
+              cin>>v[i];
+          }
+          
+          quicksort(v,0,n-1);
+          
+          for(int i=0;i<n;i++){
+              cout<<v[i]<<" ";
+          }
+}
