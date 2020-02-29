@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool sortcol( const vector<float>& v1, 
+               const vector<float>& v2 ) { 
+ return v1[0]/v1[1] > v2[0]/v2[1]; 
+} 
+
+int main(){
+    
+          int t;
+          cin>>t;
+          while(t--){
+              int n,w;
+              cin>>n>>w;  vector<vector<float>>v;  vector<float>temp;
+              
+              for(int i=0;i<n;i++){
+                  float value,weight;
+                  cin>>value>>weight;
+                 // temp.push_back(value/weight);
+                  temp.push_back(value); temp.push_back(weight);
+                  v.push_back(temp);
+                  temp.clear();
+              }
+              
+             sort(v.begin(), v.end(),sortcol);  
+             
+       /*  for(int i=0;i<v.size();i++){
+                 for(int j=0;j<v[i].size();j++){
+                     cout<<v[i][j]<<" "; 
+                 }
+                 cout<<endl;
+             }
+             cout<<"----------------"<<endl;  */
+    double res=0.00;  int weight=0;
+             for(int i=0;i<v.size();i++){
+                 if(weight+v[i][1]<=w){
+                     weight+=v[i][1];
+                     res+=v[i][0];
+                     if(weight==w)
+                     break;
+                 }
+                 else{
+                       int left=w-weight;
+                       res+=(left/v[i][1])*v[i][0];
+                       break;
+                 }
+             }
+              
+              cout<<fixed<<setprecision(2)<<res<<endl;
+          }
+}
