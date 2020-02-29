@@ -60,4 +60,5 @@ int main() {
 	    p = findminmax(v,0,v.size()-1);
 	    
 	    cout<<p.first<<" "<<p.second<<endl;
+	       
 }
