@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int max(int a,int b){
+      if(a>b)
+       return a;
+      return b;
+  }
+int main()
+ {
+	  int t;
+	  cin>>t;
+	  while(t--){
+	      int n,w;
+	      cin>>n>>w;
+	      
+	      vector<vector<int>>v(n,vector<int>(2,0));
+	      for(int i=0;i<n;i++){
+	           int val; cin>>val;
+	           v[i][0]=val;
+	      }
+	      
+	      for(int i=0;i<n;i++){
+	          int weight; cin>>weight;
+	          v[i][1]=weight;
+	      }
+	   //   for(int i=0;i<n;i++){
+	   //       cout<<v[i][0]<<" "<<v[i][1];
+	   //       cout<<endl;
+	   //   }
+	      int ar[n+1][w+1]={ 0 };
+	      for(int i=0;i<n+1;i++){
+	          for(int j=0;j<w+1;j++){
+	              ar[i][j]=0;
+	          }
+	       }
+	      
+	      for(int i=1;i<n+1;i++){
+	          for(int j=1;j<w+1;j++){
+	              if(j-v[i-1][1]>=0)
+	              ar[i][j]=max(ar[i-1][j],(ar[i-1][j-v[i-1][1]]+v[i-1][0]));
+	              else
+	              ar[i][j]=ar[i-1][j];
+	          }
+	      }
+	   //   cout<<"------------------------------"<<endl;
+	      
+	   //   for(int i=0;i<n+1;i++){
+	   //       for(int j=0;j<w+1;j++){
+	   //           //ar[i][j]=0;
+	   //           cout<<ar[i][j]<<" ";
+	   //       }
+	   //       cout<<endl;
+	   //   }
+	   //   cout<<"------------------------------"<<endl;
+	   int mx=-1;
+	      for(int i=0;i<n+1;i++){
+	          for(int j=0;j<w+1;j++){
+	              if(mx<ar[i][j])
+	                mx=ar[i][j];
+	          }
+	      }
+	      cout<<mx<<endl;
+	  }
+}
