@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int min(int a,int b){
+    if(a>b)
+    return b;
+    else
+    return a;
+}
+int main()
+ {
+	   int t;
+	   cin>>t;
+	   while(t--){
+	       int v;
+	       cin>>v;
+	       
+	       vector<vector<int>>res(v,vector<int>(v,0));    
+	       for(int i=0;i<v;i++){
+	           for(int j=0;j<v;j++){
+	              string temp;
+	              cin>>temp;
+	              if(temp=="INF")
+	               res[i][j]=10000000;
+	              else 
+	              res[i][j]=stoi(temp);
+	              
+	               
+	             //  cout<<res[i][j]<<" ";
+	           }
+	         //  cout<<endl;
+	           
+	       }
+	   //    cout<<"-------"<<endl;
+	       
+	       for(int k=1;k<=v;k++){
+	           for(int i=1;i<=v;i++){
+	               for(int j=1;j<=v;j++){
+	                   res[i-1][j-1]=min(res[i-1][j-1],res[i-1][k-1]+res[k-1][j-1]);
+	               }
+	           }
+	       }
+	       for(int i=0;i<v;i++){
+	           for(int j=0;j<v;j++){
+	               if(res[i][j]!=10000000)
+	               cout<<res[i][j]<<" ";
+	               else
+	               cout<<"INF"<<" ";
+	           }
+	           cout<<endl;
+	       }
+	   }
+}
